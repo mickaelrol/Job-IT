@@ -2,7 +2,7 @@
  # php bin/console debug:writing --all
  
  mise en service du serveur
- # symfony console serve
+ # symfony serve
  # php bin/console make:migration  
  # php bin/console database:make:migration   
  
