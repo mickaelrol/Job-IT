@@ -1,6 +1,11 @@
  listing des outils / services symfony
  # php bin/console debug:writing --all
  
+ mise en service du serveur
+ # symfony console serve
+ # php bin/console make:migration  
+ # php bin/console database:make:migration   
+ 
  dl fixtures
  # php bin/console d:f:l
  
