@@ -1,11 +1,10 @@
-# Job-IT
- # listing des outils / services symfony
+ listing des outils / services symfony
  # php bin/console debug:writing --all
  
- # dl fixtures
+ dl fixtures
  # php bin/console d:f:l
  
- # require faker
+ require faker
  # composer require orm-fixtures   
  # composer require fzaninotto/faker
  # composer require liorchamla/faker-prices    
