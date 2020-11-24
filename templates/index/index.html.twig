@@ -5,9 +5,16 @@
 
 {% block body %}
 	<div class="row">
-		{% for c in category %}
-			<h2>{{ c.nom }}</h2>
-			{% for j in job %}
+		{% set cat = null %}
+		
+		{% for j in job %}
+			{% if cat != job.category %}
+			{% cat = job.category %}
+			{% set maVar = category[] %}
+			{% endif %}
+			<h2 class="text-center">{{ job.category }}</h2>
+			
+			<div class="d-flex justify-content-center w-100">
 				<div class="card mb-3">
 					<div class="row no-gutters">
 						<div class="col-md-4">
@@ -26,8 +33,8 @@
 						</div>
 					</div>
 				</div>
-			{% endfor %}
-			<hr>
+			</div>
+				
 		{% endfor %}
 	</div>
 {% endblock %}

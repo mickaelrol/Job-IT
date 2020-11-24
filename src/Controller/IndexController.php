@@ -16,7 +16,20 @@ class IndexController extends AbstractController
     public function index(CategoriesRepository $categoriesRepository, JobsRepository $jobsRepository)
     {
         $categories = $categoriesRepository->findAll();
-        $job = $jobsRepository->findAll();
+        $job = $jobsRepository->findBy([],[
+            'category' => 'ASC',
+            'created' => 'ASC'
+        ], 10);
+
+        /*
+            for job in jobs:
+                if last != job.categorie_id:
+                    show_categorie(categorie[job.categorie_id])
+                    last = job.categorie_id;
+                endif;
+                show(job);
+            endfor;
+        */
 
         return $this->render('index/index.html.twig', [
             'category' => $categories,
