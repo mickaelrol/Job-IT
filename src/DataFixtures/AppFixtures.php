@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Liior\Faker\Prices($faker));
-        $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce( $faker));
+        $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
         $faker->addProvider(new \Bluemmb\Faker\PicsumPhotosProvider($faker));
 
         for ($c = 0; $c < 5; $c++) {
@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($categorie);
 
-            for ($j = 0; $j < mt_rand(25, 30); $j++) {
+            for ($j = 0; $j < mt_rand(10, 15); $j++) {
                 $job = new Jobs;
                 $job->setContrat($faker->jobTitle)
                     ->setEntreprise($faker->company)

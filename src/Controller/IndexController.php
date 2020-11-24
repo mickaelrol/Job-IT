@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\CategoriesRepository;
 use App\Repository\JobsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
@@ -16,24 +15,22 @@ class IndexController extends AbstractController
     public function index(CategoriesRepository $categoriesRepository, JobsRepository $jobsRepository)
     {
         $categories = $categoriesRepository->findAll();
-        $job = $jobsRepository->findBy([],[
-            'category' => 'ASC',
-            'created' => 'ASC'
+        $jobs = $jobsRepository->findBy([], [
+            'created' => 'DESC',
+            'category' => 'ASC'
+
         ], 10);
 
-        /*
-            for job in jobs:
-                if last != job.categorie_id:
-                    show_categorie(categorie[job.categorie_id])
-                    last = job.categorie_id;
-                endif;
-                show(job);
-            endfor;
-        */
+        $arrayCateg = array();
+        foreach ($jobs as $job) {
+            if (!in_array($job->getCategory()->getNom(), $arrayCateg)) {
+                $arrayCateg[] = $job->getCategory()->getNom();
+            }
+        }
 
         return $this->render('index/index.html.twig', [
-            'category' => $categories,
-            'job' => $job
+            'categs' => $arrayCateg,
+            'job' => $jobs
         ]);
     }
 }
