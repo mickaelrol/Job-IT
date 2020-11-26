@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Metier :
+	{{  job.contrat }}
+{% endblock %}
+
+{% block body %}
+	<div class="card mb-3">
+		<div class="row no-gutters">
+			<div class="col-md-9">
+				<div class="card-body">
+					<h3 class="card-text mt-2">{{ job.entreprise }}</h3>
+					<p class="card-text mt-2">{{ job.lieu }}
+						-
+						{{ job.pays }}</p>
+					<hr>
+					<p class="card-title display-4 mt-5">{{ job.contrat }}</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<img src="{{ job.logo }}" class="card-img w-60" alt="{{ job.logo }}">
+			</div>
+		</div>
+	</div>
+	<p class="mt-5">{{ job.description }}</p>
+	<strong>
+		<p class="mt-2 ">Pour postuler veuillez envoyer cv + lettre de motivation à
+			{{ job.email }}</p>
+	</strong>
+
+{% endblock %}
