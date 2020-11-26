@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Création d'un Job
+{% endblock %}
+
+{% block body %}
+	{# {{ form(formView)}} #}
+	{{ form_start(formView) }}
+	{{ form_errors(formView) }}
+
+	{# {{ form_widget(formView) }} #}
+
+	<div class="row">
+		<div class="col">
+			{{ form_row(formView.category) }}
+			{{ form_row(formView.contrat) }}
+			{{ form_row(formView.entreprise) }}
+			{{ form_row(formView.logo) }}
+			{{ form_row(formView.url) }}
+		</div>
+		<div class="col">
+			{{ form_row(formView.lieu) }}
+			{{ form_row(formView.pays) }}
+			{{ form_row(formView.email) }}
+			{{ form_row(formView.description) }}
+		</div>
+	</div>
+
+
+	<button type="submit" class="btn btn-primary">
+		<i class="fas fa-save fa-2x"></i>
+		Créer le produit
+	</button>
+	{{ form_end(formView) }}
+
+
+{% endblock %}
