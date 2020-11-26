@@ -34,6 +34,11 @@ class Categories
      */
     private $affilies;
 
+    public function __toString(): string
+    {
+        return $this->nom;
+    }
+
     public function __construct()
     {
         $this->jobs = new ArrayCollection();
