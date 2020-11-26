@@ -15,7 +15,9 @@ class IndexController extends AbstractController
     public function index(CategoriesRepository $categoriesRepository, JobsRepository $jobsRepository)
     {
         $categories = $categoriesRepository->findAll();
-        $jobs = $jobsRepository->findBy([], [
+        $jobs = $jobsRepository->findBy([
+            'active' => 1
+        ], [
             'created' => 'DESC',
             'category' => 'ASC'
 
@@ -23,8 +25,8 @@ class IndexController extends AbstractController
 
         $arrayCateg = array();
         foreach ($jobs as $job) {
-            if (!in_array($job->getCategory()->getNom(), $arrayCateg)) {
-                $arrayCateg[] = $job->getCategory()->getNom();
+            if (!in_array(array('id' => $job->getCategory()->getId(), 'nom' => $job->getCategory()->getNom()), $arrayCateg)) {
+                $arrayCateg[] = array('id' => $job->getCategory()->getId(), 'nom' => $job->getCategory()->getNom());
             }
         }
 
