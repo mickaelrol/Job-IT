@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
                     ->setUrl($faker->url)
                     ->setPays($faker->country)
                     ->setLieu($faker->city)
-                    ->setDescription($faker->paragraph())
+                    ->setDescription($faker->paragraph(200))
                     ->setToken($faker->unique()->word)
                     ->setEmail($faker->email)
                     ->setActive($faker->boolean())
