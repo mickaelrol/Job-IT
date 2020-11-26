@@ -83,7 +83,7 @@ class Jobs
     private $updated;
 
     /**
-     * @ORM\ManyToOne(targetEntity=categories::class, inversedBy="jobs")
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="jobs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
@@ -92,6 +92,11 @@ class Jobs
      * @ORM\Column(type="text")
      */
     private $postuler;
+
+    public function __toString(): string
+    {
+        return $this->contrat;
+    }
 
     public function getId(): ?int
     {
