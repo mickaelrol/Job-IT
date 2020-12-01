@@ -2,13 +2,26 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoriesRepository;
+
+use App\Entity\Jobs;
 use App\Repository\JobsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategoriesRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 
 class IndexController extends AbstractController
 {
+    /**
+	 * JobsController constructor.
+	 * @param EntityManagerInterface $em
+	 */
+	public function __construct(EntityManagerInterface $em) {
+		$this->EntityManager = $em;
+    }
+    
     /**
      * @Route("/", name="index")
      */
@@ -35,4 +48,42 @@ class IndexController extends AbstractController
             'job' => $jobs
         ]);
     }
+
+    // /**
+    //  * Route("/search/{recherche}" , name="search")
+    //  */
+
+    //  public function search($recherche , JobsRepository $jobsRepository, CategoriesRepository $categoriesRepository){
+
+    //     $recherche = $categoriesRepository->findBy([
+    //         'nom' => $recherche 
+    //     ]);
+    //     $recherche = $jobsRepository->findBy([
+    //         'contrat' => $recherche ,
+    //         'entreprise' => $recherche ,
+    //         'pays' => $recherche ,
+    //         'lieu' => $recherche 
+    //     ]);
+
+    // }
+
+    
+    /**
+	 * @Route("/search/", name="search")
+	 */
+	public function search(CategoriesRepository $categoriesRepository):Response {
+		$Request = Request::createFromGlobals();
+        $query = $Request->query->get('q');
+
+        $categories = $categoriesRepository->findAll();
+
+		$JobsRepository = $this->EntityManager->getRepository(Jobs::class);
+		$Jobs = $JobsRepository->search($query);
+
+		return $this->render('index/search.html.twig', [
+            'categs' => $categories,
+			'job' => $Jobs
+		]);
+	}
+
 }
