@@ -21,8 +21,9 @@
 					</a>
 
 				</div>
-				<form action="#" method="get">
-					<input type="search" name="search" id="search" class="mb-5" placeholder="Développeur ...">
+				<form action="{{ path('search') }}">
+					<input type="search" name="q" id="search" class="mb-5" placeholder="Développeur ...">
+					<input type="submit" value="Rechercher">
 				</form>
 				{% block body %}{% endblock %}
 				<footer class="mt-5">
