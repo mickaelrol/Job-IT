@@ -47,4 +47,16 @@ class JobsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function search($query) {
+        return $this->createQueryBuilder('jobs')
+					->andWhere('jobs.contrat LIKE :qry')
+					->orWhere('jobs.entreprise LIKE :qry')
+					->orWhere('jobs.pays LIKE :qry')
+					->orWhere('jobs.lieu LIKE :qry')
+					->andWhere('jobs.active = 1')
+					->setParameter('qry', '%'.$query.'%')
+					->getQuery()
+                    ->execute();
+    }
 }
